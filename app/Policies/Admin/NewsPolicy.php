@@ -20,9 +20,10 @@ class NewsPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, News $news): bool
+    public function view(User $user, News $news): Response
     {
-        //
+        return $user->can('news.index') ? Response::allow() :
+            Response::deny('you dont have permission to visit news');
     }
 
     /**
@@ -36,9 +37,10 @@ class NewsPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, News $news): bool
+    public function update(User $user, News $news): Response
     {
-        //
+        return $user->can('news.edit') ? Response::allow() :
+            Response::deny('you dont have permission to edit news');
     }
 
     /**

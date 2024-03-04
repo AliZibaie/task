@@ -2,6 +2,11 @@
 
 
     <div class="">
+        @if(session('success'))
+            <p class="text-green-700 text-xl text-center">{{session('success')}}</p>
+        @elseif(session('fail'))
+            <p class="text-red-700 text-xl text-center">{{session('fail')}}</p>
+        @endif
         <table class="max-w-96 mx-auto my-12 text-sm text-left  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -38,7 +43,10 @@
                     {{$article->resource}}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="{{route('news.edit', $article)}}" class="text-lg text-blue-600 dark:text-blue-500 hover:underline flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-lg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M2 26h28v2H2zM25.4 9c.8-.8.8-2 0-2.8l-3.6-3.6c-.8-.8-2-.8-2.8 0l-15 15V24h6.4zm-5-5L24 7.6l-3 3L17.4 7zM6 22v-3.6l10-10l3.6 3.6l-10 10z"/></svg>
+                        Edit
+                    </a>
                 </td>
             </tr>
             @empty
