@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\News\NewsCollection;
 use App\Http\Resources\News\NewsResource;
 use App\Models\News;
+use App\Services\V1\NewsFilterQuery;
 
 class NewsController extends Controller
 {
     public function index(): NewsCollection
     {
-        return new NewsCollection(News::all());
+        return new NewsCollection(NewsFilterQuery::index());
     }
     public function show(News $news): NewsResource
     {
