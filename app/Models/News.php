@@ -16,4 +16,8 @@ class News extends Model
         'modified_at',
         'resource',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
