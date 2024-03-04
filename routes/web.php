@@ -33,8 +33,12 @@ Route::middleware('role:admin')->group(function () {
 Route::middleware('guest')->group(function (){
     Route::get('register', [AuthController::class, 'showRegister'])
         ->name('show.register');
+    Route::get('login', [AuthController::class, 'showLogin'])
+        ->name('show.login');
     Route::post('register', [AuthController::class, 'register'])
         ->name('register');
+    Route::post('login', [AuthController::class, 'login'])
+        ->name('login');
 });
 Route::middleware('auth')->group(function () {
     Route::post('dashboard',[AuthController::class, 'logout'])->name('logout');

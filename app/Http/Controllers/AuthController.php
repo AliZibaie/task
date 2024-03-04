@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,5 +35,18 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        if (Auth::attempt($request->validated())){
+            $user = User::where('email', $request->validated()['email'])->first();
+//            $user = $this->userRepository->where('email', $request->validated()['email'])->first();
+            Auth::login($user, true);
+            return redirect('dashboard');
+        }
+        return back()->withErrors([
+            'password' => ['wrong password!']
+        ]);
     }
 }
