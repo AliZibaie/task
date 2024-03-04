@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NewsController extends Controller
 {
@@ -12,9 +12,9 @@ class NewsController extends Controller
     {
         $this->authorizeResource(News::class);
     }
-    public function index()
+    public function index(): View
     {
-        $articles = News::all();
+        $articles = News::query()->paginate(7);
         return view('news.index', compact('articles'));
     }
 }

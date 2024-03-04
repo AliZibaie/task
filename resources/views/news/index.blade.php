@@ -1,8 +1,8 @@
 <x-app-layout>
 
 
-    <div class="relative  shadow-md sm:rounded-lg">
-        <table class="max-w-96 mx-auto my-12 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <div class="">
+        <table class="max-w-96 mx-auto my-12 text-sm text-left  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-8 py-3 text-lg">
@@ -25,10 +25,10 @@
             <tbody>
             @forelse($articles as $article)
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-12 py-4 text-yellow-700 text-lg">
+                <th scope="row" class="px-12 py-4 text-yellow-700 text-lg max-w-80 truncate">
                     {{$article->title}}
                 </th>
-                <td class="px-12 py-4 text-green-600 text-lg">
+                <td class="text-green-600 text-lg truncate max-w-96">
                     {{$article->content}}
                 </td>
                 <td class="px-12 py-4 text-orange-700 text-lg">
@@ -63,6 +63,8 @@
 
             </tbody>
         </table>
+        <div class="px-40">
+            {{ $articles->links() }}
+        </div>
     </div>
-
 </x-app-layout>
