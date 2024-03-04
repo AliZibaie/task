@@ -36,3 +36,6 @@ Route::middleware('guest')->group(function (){
     Route::post('register', [AuthController::class, 'register'])
         ->name('register');
 });
+Route::middleware('auth')->group(function () {
+    Route::post('dashboard',[AuthController::class, 'logout'])->name('logout');
+});
