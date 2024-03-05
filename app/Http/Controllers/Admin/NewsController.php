@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\News\UpdateNewsRequest;
 use App\Models\News;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\View\View;
+use function Pest\Laravel\call;
 
 class NewsController extends Controller
 {
@@ -16,7 +18,7 @@ class NewsController extends Controller
     }
     public function index(): View
     {
-        $articles = News::query()->paginate(7);
+        $articles = News::query()->paginate(5);
         return view('news.index', compact('articles'));
     }
 
@@ -34,5 +36,16 @@ class NewsController extends Controller
         }catch (\Throwable $exception){
             return redirect('news', 500)->with('fail', 'failed to update news!');
         }
+    }
+
+    public function store()
+    {
+        try {
+            Artisan::call("get:news");
+            return redirect('news')->with('success', 'news received successfully!');
+        }catch (\Throwable $exception){
+            return redirect('news', 500)->with('fail', 'failed to receive news!');
+        }
+
     }
 }
